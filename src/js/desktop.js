@@ -1,5 +1,5 @@
 /*
- * This sample plugin adds yourself to a User selection field with a click of a button
+ * This sample plug-in adds yourself to a User Selection field with the click of a button
  * in the record details page.
  * Copyright (c) 2018 Cybozu
  *
