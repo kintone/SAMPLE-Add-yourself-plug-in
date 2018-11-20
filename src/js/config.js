@@ -10,14 +10,14 @@ jQuery.noConflict();
     var CONF = kintone.plugin.app.getConfig(PLUGIN_ID);
 
     function setDropDownForSpace(rows) {
-        // Get each field information
+        // Get information of each field
         for (var i = 0; i < rows.length; i++) {
             var fields = rows[i];
             for (var cnt = 0; cnt < fields.length; cnt++) {
                 var rowField = fields[cnt];
                 var $option = $('<option>');
                 switch (rowField.type) {
-                    // Only pick Space fields
+                    // Only select Space fields
                     case 'SPACER':
                         $option.attr('value', rowField.elementId);
                         $option.text(rowField.elementId);
@@ -32,7 +32,7 @@ jQuery.noConflict();
         $('#select_space_field').val(CONF.space);
     }
     function getLayout() {
-        // Retrieve field information, then set dropdown
+        // Retrieve field information, then set drop-down
         return kintone.api(kintone.api.url('/k/v1/preview/app/form/layout', true), 'GET',
             {'app': kintone.app.getId()}).then(function(resp) {
             var rows = [];
@@ -57,7 +57,7 @@ jQuery.noConflict();
         });
     }
     function setDropDownForUser() {
-        // Retrieve field information, then set dropdown
+        // Retrieve field information, then set drop-down
         return kintone.api(kintone.api.url('/k/v1/preview/app/form/fields', true), 'GET',
             {'app': kintone.app.getId()}).then(function(resp) {
 
@@ -69,7 +69,7 @@ jQuery.noConflict();
                 var $option = $('<option>');
 
                 switch (prop.type) {
-                    // Only pick User Select field
+                    // Only select User Selection field
                     case 'USER_SELECT':
                         $option.attr('value', prop.code);
                         $option.text(prop.label);
@@ -92,7 +92,7 @@ jQuery.noConflict();
             CONF.label = "Add yourself";
         }
         $('#text-button-label').val(CONF.label);
-        // Set dropdown list
+        // Set drop-down list
         setDropDownForUser()
             .then(getLayout)
             .then(setDropDownForSpace);
@@ -103,9 +103,9 @@ jQuery.noConflict();
             var label = $('#text-button-label').val();
             var user = $('#select_user_field').val();
 
-            // Check requred fields
+            // Check required fields
             if (space === '' || label === '' || user === '') {
-                alert('Please set required field(s)');
+                alert('Please set the required field(s) in the drop-downs');
                 return;
             }
             config.space = space;
