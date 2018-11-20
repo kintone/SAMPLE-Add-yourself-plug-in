@@ -9,12 +9,12 @@
 (function(PLUGIN_ID) {
     'use strict';
 
-    // Get plugin configuration settings
+    // Get plug-in configuration settings
     var CONFIG = kintone.plugin.app.getConfig(PLUGIN_ID);
     if (!CONFIG) {
         return false;
     }
-    // Get each settings
+    // Get each setting
     var CONFIG_SPACE = CONFIG.space;
     var CONFIG_LABEL = CONFIG.label;
     var CONFIG_USER = CONFIG.user;
@@ -33,7 +33,7 @@
         objParam.record[CONFIG_USER] = {};
         objParam.record[CONFIG_USER].value = [];
 
-        // If there are other users in the User field, also add those users
+        // If there are other users in the User Selection field, also add those users
         for (var i = 0; i < member.length; i++) {
             objParam.record[CONFIG_USER].value[i] = {};
             objParam.record[CONFIG_USER].value[i].code = {};
