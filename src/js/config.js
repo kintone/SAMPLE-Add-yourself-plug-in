@@ -11,7 +11,7 @@ jQuery.noConflict();
 
     function setDropDown(type) {
         // Retrieve field information, then set drop-down
-        return KintoneConfigHelper.getFields(type).then(function(resp) {
+        return KintoneConfigHelper.getFields(["USER_SELECT", "SPACER"]).then(function(resp) {
             var $userDropDown = $('#select_user_field');
             var $spaceDropDown = $('#select_space_field');
             for (var i = 0; i < resp.length; i++) {
@@ -32,10 +32,10 @@ jQuery.noConflict();
                 }
             }
             // Set default values
-            if (CONF.user && type === 'USER_SELECT') {
+            if (CONF.user) {
                 $userDropDown.val(CONF.user);
             }
-            if (CONF.space && type === 'SPACER') {
+            if (CONF.space) {
                 $spaceDropDown.val(CONF.space);
             }
         }, function(resp) {
@@ -50,8 +50,7 @@ jQuery.noConflict();
         }
         $('#text-button-label').val(CONF.label);
         // Set drop-down list
-        setDropDown('USER_SELECT')
-            .then(setDropDown('SPACER'));
+        setDropDown();
 
         // Set input values when 'Save' button is clicked
         $('#check-plugin-submit').click(function() {
