@@ -9,10 +9,9 @@ jQuery.noConflict();
     // Get configuration settings
     var CONF = kintone.plugin.app.getConfig(PLUGIN_ID);
 
-    function setDropDown() {
+    function setDropDown(type) {
         // Retrieve field information, then set drop-down
-        // eslint-disable-next-line no-undef
-        return KintoneConfigHelper.getFields().then(function(resp) {
+        return KintoneConfigHelper.getFields(type).then(function(resp) {
             var $userDropDown = $('#select_user_field');
             var $spaceDropDown = $('#select_space_field');
             for (var i = 0; i < resp.length; i++) {
@@ -33,10 +32,10 @@ jQuery.noConflict();
                 }
             }
             // Set default values
-            if (CONF.user) {
+            if (CONF.user && type === 'USER_SELECT') {
                 $userDropDown.val(CONF.user);
             }
-            if (CONF.space) {
+            if (CONF.space && type === 'SPACER') {
                 $spaceDropDown.val(CONF.space);
             }
         }, function(resp) {
@@ -51,7 +50,8 @@ jQuery.noConflict();
         }
         $('#text-button-label').val(CONF.label);
         // Set drop-down list
-        setDropDown();
+        setDropDown('USER_SELECT')
+            .then(setDropDown('SPACER'));
 
         // Set input values when 'Save' button is clicked
         $('#check-plugin-submit').click(function() {
