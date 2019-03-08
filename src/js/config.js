@@ -11,18 +11,18 @@ jQuery.noConflict();
 
     function setDropDown(type) {
         // Retrieve field information, then set drop-down
-        return KintoneConfigHelper.getFields(["USER_SELECT", "SPACER"]).then(function(resp) {
+        return KintoneConfigHelper.getFields(['USER_SELECT', 'SPACER']).then(function(resp) {
             var $userDropDown = $('#select_user_field');
             var $spaceDropDown = $('#select_space_field');
             for (var i = 0; i < resp.length; i++) {
                 var $option = $('<option></option>');
                 switch (resp[i].type) {
-                    case "USER_SELECT":
+                    case 'USER_SELECT':
                         $option.attr('value', resp[i].code);
                         $option.text(resp[i].label);
                         $userDropDown.append($option.clone());
                         break;
-                    case "SPACER":
+                    case 'SPACER':
                         $option.attr('value', resp[i].elementId);
                         $option.text(resp[i].elementId);
                         $spaceDropDown.append($option.clone());
@@ -46,7 +46,7 @@ jQuery.noConflict();
     $(document).ready(function() {
         // Set default values
         if (!CONF.label) {
-            CONF.label = "Add yourself";
+            CONF.label = 'Add yourself';
         }
         $('#text-button-label').val(CONF.label);
         // Set drop-down list
